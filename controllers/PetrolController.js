@@ -6,7 +6,7 @@ exports.GetPreviousPetrol = (req, res) => {
     var today = new Date()
     yesterday = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + (today.getDate() - 1);
     models.Nozzels.findAll({
-        where: { fuelType: req.params.name },
+        where: { fuelType: req.params.fuel },
         attributes: ['id', 'name'],
         include: [
             {

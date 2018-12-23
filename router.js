@@ -15,7 +15,7 @@ module.exports = function (app) {
     });
 
     /******Testing*****/
-    apiRoutes.get('/petrol/:name', PetrolController.GetPreviousPetrol);
+    apiRoutes.get('/:fuel', PetrolController.GetPreviousPetrol);
     apiRoutes.post('/records',PetrolController.SaveRecords)
     /******END - Testing*****/
     app.use('/v1', apiRoutes);
