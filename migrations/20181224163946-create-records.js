@@ -1,20 +1,20 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Diesel', {
+    return queryInterface.createTable('Records', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      nozzleName: {
+      nozzleId: {
         type: Sequelize.STRING
       },
       openingReading: {
         type: Sequelize.INTEGER
       },
-      closingRreading: {
+      closingReading: {
         type: Sequelize.INTEGER
       },
       rate: {
@@ -31,6 +31,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Diesel');
+    return queryInterface.dropTable('Records');
   }
 };

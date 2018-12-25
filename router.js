@@ -1,7 +1,7 @@
 
 var express = require('express');
 // var config = require('./config/config.json')['system'];
-var PetrolController = require('./controllers/PetrolController')
+var RecordsController = require('./controllers/RecordsController')
 
 // Routes
 module.exports = function (app) {
@@ -15,8 +15,9 @@ module.exports = function (app) {
     });
 
     /******Testing*****/
-    apiRoutes.get('/:fuel', PetrolController.GetPreviousPetrol);
-    apiRoutes.post('/records',PetrolController.SaveRecords)
+    apiRoutes.get('/:fuel', RecordsController.GetPreviousDayRecords);
+    apiRoutes.post('/records',RecordsController.SaveRecords);
+    apiRoutes.post('/filter',RecordsController.FilterRecords);
     /******END - Testing*****/
     app.use('/v1', apiRoutes);
 };

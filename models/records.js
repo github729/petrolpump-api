@@ -1,13 +1,13 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Diesel = sequelize.define('Diesel', {
-    nozzleName: DataTypes.STRING,
+  const Records = sequelize.define('Records', {
+    nozzleId: DataTypes.STRING,
     openingReading: DataTypes.INTEGER,
-    closingRreading: DataTypes.INTEGER,
+    closingReading: DataTypes.INTEGER,
     rate: DataTypes.INTEGER
   }, {});
-  Diesel.associate = function(models) {
+  Records.associate = function(models) {
     // associations can be defined here
   };
-  return Diesel;
+  return Records;
 };
