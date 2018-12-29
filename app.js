@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname, 'uploads')));
 app.set('superSecret', 'globalequityesearchandrevere');
 
 var url = require('url');
-app.set('port', 1332);
+app.set('port', 5000);
 
 //End
 

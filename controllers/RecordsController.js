@@ -47,8 +47,8 @@ exports.FilterRecords = function(req,res) {
     let postData = req.body;
     let today = new Date();
     models.Nozzels.hasMany(models.Records, { foreignKey: 'nozzleId' });
-    if(postData.date == 'today') {
-        let searchDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + (today.getDate());
+    if(postData.date == 'yestarday') {
+        let searchDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + (today.getDate()-1);
         where =  Sequelize.where(Sequelize.fn('date', Sequelize.col(`Records.createdAt`)), '=', searchDate);
     }
     if(postData.date == 'thisWeek') {
