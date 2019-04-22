@@ -2,16 +2,16 @@ var models = require('../models');
 var Sequelize = require('sequelize');
 
 exports.GetPreviousDayRecords = (req, res) => {
-    models.Nozzels.hasMany(models.Records, { foreignKey: 'nozzleId' });
+    models.nozzels.hasMany(models.records, { foreignKey: 'nozzleId' });
     var today = new Date()
     yesterday = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + (today.getDate() - 1);
-    models.Nozzels.findAll({
+    models.nozzels.findAll({
         where: { fuelType: req.params.fuel },
         attributes: ['id', 'name'],
         include: [
             {
-                model: models.Records,
-                where: Sequelize.where(Sequelize.fn('date', Sequelize.col(`Records.createdAt`)), '=', yesterday)
+                model: models.records,
+                where: Sequelize.where(Sequelize.fn('date', Sequelize.col(`records.createdAt`)), '=', yesterday)
             }
         ]
     }).then(petrol => {
@@ -30,7 +30,7 @@ exports.GetPreviousDayRecords = (req, res) => {
 }
 exports.SaveRecords = function (request, response) {
     let postData = request.body;
-    models.Records.create(postData).then(nozzle => {
+    models.records.create(postData).then(nozzle => {
         result = {};
         if (nozzle) {
             result.success = true;
@@ -46,10 +46,10 @@ exports.SaveRecords = function (request, response) {
 exports.FilterRecords = function(req,res) {
     let postData = req.body;
     let today = new Date();
-    models.Nozzels.hasMany(models.Records, { foreignKey: 'nozzleId' });
+    models.nozzels.hasMany(models.records, { foreignKey: 'nozzleId' });
     if(postData.date == 'yestarday') {
         let searchDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + (today.getDate()-1);
-        where =  Sequelize.where(Sequelize.fn('date', Sequelize.col(`Records.createdAt`)), '=', searchDate);
+        where =  Sequelize.where(Sequelize.fn('date', Sequelize.col(`records.createdAt`)), '=', searchDate);
     }
     if(postData.date == 'thisWeek') {
         weekStart = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + (today.getDate()-7);
@@ -67,11 +67,11 @@ exports.FilterRecords = function(req,res) {
             }
         }
     }
-    models.Nozzels.findAll({
+    models.nozzels.findAll({
         attributes: ['id', 'name','fuelType'],
         include: [
             {
-                model: models.Records,
+                model: models.records,
                 where: where
             }
         ]
